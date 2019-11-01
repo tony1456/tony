@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sass相关内容操作</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+Sass扩展了css的特性:
+变量 嵌套规则 @import导入样式 @mixin混合器及传参 @extend继承 @if @for @function 
+
+sass和scss:
+这俩套语法通过.sass和.scss俩个文件扩展名区分开,浏览器不认识sass,需要编译成css文件;
+
+sass编译方式:命令行编译模式,编译软件koala,gulp-sass前端自动化工作流;
+
+命令行编译:
+//单文件转换命令
+sass sass/a.scss css/a.css --style expanded
+sass sass/a.scss:css/a.css --style expanded
+//单文件监听命令
+sass --watch sass/input.scss:css/output.css --style expanded
+
+sass的四种编译格式:nested嵌套,expanded展开,compact紧凑,compressed压缩;
+
+sass使用$符号来标识变量;
+
+嵌套规则:sass允许将一套css样式嵌套进另一套样式中,内层的样式将外层的选择器作为父选择器.  父选择器的标识符&;
+
+@import导入样式
+@import规则在生成css文件时就把相关文件导入进来;
+@import"sidebar";这条命令将把sidebar.scss文件中所有样式添加到当前样式表中;
+
+混合器(宏):@mixin,
+可以通过sass的混合器实现大段样式的重用;
+混合器传参:@include
+
+@extend 选择器继承来精简css;
+
+@if 的表达式返回值是true时,输出{}内;
+
+@for指令可以在限制的范围内重复输出格式，每次按要求（变量的值）对输出结果做出变动。
+     @for $i from 1 through 3//循环1到3;(循环1到n)
+	 @for $i from 1 to 4     //循环1到3不包含4(循环1到n-1)
+
+@function:sass支持自定义函数,并能在任何属性值或sass script中使用 返回值是@return;
+
+函数防抖(debounce)和节流(throttle):都是防止某一时间频繁触发;
+函数防抖(debounce)是某一段时间内只执行一次;
+函数节流(throttle)是间隔时间执行;
+优点:可以优化函数触发频率过高导致响应速度跟不上触发频率,出现延迟,假死或卡顿的现象;
+
+总结:
+函数节流(throttle)不管事件触发有多频繁,都会保证在规定时间内一定会执行一次真正的事件处理函数;
+函数防抖(debounce)只是在最后一次事件后才触发一次函数;
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

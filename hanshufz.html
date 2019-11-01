@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函数封装</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//函数防抖
+function debounce(delay,callback){
+var timer;
+return function(){
+clearTimeout(timer);
+timer=setTimeout(function(){
+callback();	
+},delay);	
+}	
+}
+	
+//函数节流
+function throttle(delay,callback){
+var lastTime,timer;
+return function(){
+var nowTime=Date.now();
+if(lastTime&&nowTime<lastTime+1000){
+clearTimeout(timer);
+timer=setTimeout(function(){
+lastTime=nowTime;
+callback();	
+},delay);	
+}else{
+lastTime=nowTime;
+callback();	
+}	
+}	
+}		
+	
+//冒泡排序
+var arr=[4,3,2,1];
+function fn(arr){
+var temp;
+for(var i=0;i<arr.length-1;i++){
+for(var j=0;j<arr.length-i-1;j++){
+if(arr[j]>arr[j+1]){
+temp=arr[j];
+arr[j]=arr[j+1];
+arr[j+1]=temp;
+}	
+}	
+}
+return arr;	
+}
+console.log(fn(arr));//[1, 2, 3, 4]
+	
+//选择排序
+var arr=[9,6,4,8,7];
+function fn1(arr){
+var temp;
+for(var i=0;i<arr.length-1;i++){
+for(var j=i+1;j<arr.length;j++){
+if(arr[i]>arr[j]){
+temp=arr[i];
+arr[i]=arr[j];
+arr[j]=temp;	
+}	
+}	
+}
+return arr;	
+}
+console.log(fn1(arr));//[4, 6, 7, 8, 9]
+	
+//数组去重
+var arr=[7,7,8,8,9,8,7,9,9];
+arr.sort();
+function fn2(arr){
+var t=[];
+for(var i=0;i<arr.length;i++){
+var flag=true;
+for(var j=i;j<arr.length;j++){
+if(arr[i]==arr[j+1]){
+flag=false;
+break;	
+}	
+}
+if(flag){
+t.push(arr[i]);	
+}	
+}
+return t;	
+}
+console.log(fn2(arr));//[7, 8, 9]	
+
+//函数获取非行内样式兼容
+function getStyle(ele,property){
+if(getComputedStyle){
+return getComputedStyle(ele,false)[property];
+}
+return ele.currentStyle[property];
+}
+
+//事件监听兼容
+function addEvent(ele,type,fn){
+if(ele,addEVentListener){
+ele.addEVentListener(type,fn);	
+}else{
+ele.attachEvent('on'+type,fn);	
+}	
+}
+	
+//事件移除函数
+function removeEvent(ele,type,fn){
+if(ele,removeEventListener){
+ele.removeEventListener(type,fn);	
+}else{
+ele.detachEvent('on'+type,fn);	
+}	
+}
+
+//事件委托
+事件源.addEventListener('事件',function(e){
+var e=||event;
+var target=e.target||e.srcElement;
+if(target.nodeName.toLowerCase()=='元素名'){}	
+});
+
+//获取事件对象兼容
+var ev=e||window.event;
+
+//获取事件触发元素的兼容
+var Target=event.target||event.srcElement;
+
+//键盘事件兼容
+var eve=eve||window.event;
+var keyC=eve.keyCode||eve.which;
+
+//获取滚动条距离的兼容
+documentElement.scrollTop||document.body.scrollTop;
+
+//网页可视区域兼容
+window.innerHeight||document.documentElement.clientHeight;
+window.innerWidth||document.documentElement.clientWidth;
+
+//阻止事件默认兼容
+event.preventDefault?event.preventDefault():(e.returnValue=false);
+
+//阻止事件冒泡(传播)兼容
+event.stopPropagation?event.stopPropagation():(evnet.cancelBubble=true);
+	
+	
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函数的防抖节流</title>
+</head>
+<body>
+<button class="btn">按钮</button>
+
+
+<div class="form">
+没抖<input type="text" name="" class="in1"/><br />
+
+防抖<input type="text" name="" class="in2"/><br/>
+
+节流<input type="text" name="" class="in3"/><br/>
+	
+</div>
+<div class="box"></div>
+	
+</body>
+<script src="jquery-1.8.3.js"></script>
+<script type="text/javascript">
+function ajax(){
+$.ajax({
+url:'to.php',
+type:'get',
+data:'input='+$('.in1').val(),
+dataType:'text',
+success:function (data){
+$('.box').append('<div>'+data+'</div>');	
+}
+});	
+}	
+
+$('.in1').keyup(function(){
+ajax();	
+})
+//函数防抖
+function debounce(delay,callback){
+var timer;
+return function (){
+clearTimeout(timer);
+timer=setTimeout(function(){
+callback();	
+},delay);	
+}	
+}
+var debounceAjax=debounce(400,ajax);
+$('.in2').keyup(function(){
+debounceAjax();	
+})
+
+//函数节流
+function throttle(delay,callback){
+var lastTime,timer;
+return function(){
+var nowTime=Date.now();
+if(lastTime&&nowTime<lastTime+1000){
+	clearTimeout(timer);
+	timer=setTimeout(function(){
+	lastTime=nowTime;
+	callback();	                       
+	},delay);
+}else{
+lastTime=nowTime;
+callback();
+}	
+}	
+}
+var throttleAjax=throttle(5000,ajax);
+$('.in3').keyup(function(){
+throttleAjax();	
+})
+var speed=1000;
+function send(){
+console.log('你好呀');	
+}
+var throttleSend=throttle(speed,send);
+$('.btn').click(function(){
+	throttleSend();
+})
+$('.btn1').click(function(){
+
+})
+</script>
+</html>
+ 
